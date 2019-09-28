@@ -20,7 +20,7 @@ class App extends React.Component {
         const list = [];
         const { users } = this.state;
 
-        users.forEach(user => list.push(<li key={user.id}>{ user.name + user.age }</li>));
+        users.forEach(user => list.push(<li key={user.id}>{ user.name + ' ' + user.age }</li>));
 
         return list;
     };
