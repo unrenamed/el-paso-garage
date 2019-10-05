@@ -1,7 +1,8 @@
 import React from 'react';
-import './App.css';
 import { connect } from "react-redux";
 import { getUsersAction } from "./actions/getUsersAction";
+import { Button, notification } from "antd";
+import './App.css';
 import * as _ from 'lodash';
 
 class App extends React.Component {
@@ -24,9 +25,17 @@ class App extends React.Component {
         return list;
     };
 
+    openNotification = () => {
+        notification.success({
+            message: 'Hi, I\' Nazar - El Paso Garage administrator ;)',
+            description: 'So, welcome and feel free to use my app. See you soon!'
+        })
+    };
+
     render() {
         return (
             <div className="App">
+                <Button onClick={() => this.openNotification()}>Click here</Button>
                 <ol>
                     {this.createUsersList()}
                 </ol>
