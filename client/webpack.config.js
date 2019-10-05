@@ -1,11 +1,21 @@
 const path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+
+const htmlPlugin = new HtmlWebPackPlugin({
+    template: "./public/index.html",
+    filename: "./index.html",
+    favicon: "./assets/images/favicon.ico"
+});
 
 module.exports = {
     entry: "./src/index.js",
     mode: "development",
     output: {
-        filename: "./main.js"
+        filename: "bundle.js"
     },
+    plugins: [
+        htmlPlugin
+    ],
     devServer: {
         contentBase: path.join(__dirname, "public"),
         compress: true,
@@ -36,7 +46,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.(png|svg|jpg|gif|ico)$/,
                 use: ["file-loader"]
             }
         ]
