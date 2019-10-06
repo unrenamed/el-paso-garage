@@ -11,7 +11,8 @@ module.exports = {
     entry: "./src/index.js",
     mode: "development",
     output: {
-        filename: "bundle.js"
+        filename: "bundle.js",
+        publicPath: '/'
     },
     plugins: [
         htmlPlugin
@@ -27,13 +28,14 @@ module.exports = {
           }
         },
         watchContentBase: true,
-        progress: true
+        progress: true,
+        historyApiFallback: true
     },
     module: {
         rules: [
             {
-                test: /\.m?js$/,
-                exclude: /(node_modules|bower_components)/,
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
                 use: {
                     loader: "babel-loader"
                 }
