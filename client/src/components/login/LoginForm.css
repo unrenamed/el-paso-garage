@@ -1,0 +1,17 @@
+.signInButton button {
+    width: 100%;
+    background-color: #28a745;
+    background-image: linear-gradient(-180deg,#34d058,#28a745 90%);
+    border-color: #28a745;
+}
+
+.signInButton button:hover, .signInButton button:focus {
+    background-color: #269f42;
+    background-image: linear-gradient(-180deg,#2fcb53,#269f42 90%);
+    background-position: -.5em;
+    border-color: #28a745;
+}
+
+.signInButton {
+    margin: 0;
+}

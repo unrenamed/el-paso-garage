@@ -1,55 +1,37 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getUsersAction } from './actions/getUsersAction';
-import { Button, notification } from 'antd';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import * as _ from 'lodash';
+import R from './res/R';
+import { setupAppConfigs } from './configs/app.config';
+import { withAuth } from './utils/auth/withAuth.jsx';
+import { withTitle } from './utils/title/withTitle.jsx';
+import { compose } from 'redux';
+import Header from './components/header/Header.jsx';
 import Login from './components/login/Login.jsx';
 import Registration from './components/registration/Registration.jsx';
-import Header from './components/header/Header.jsx';
+import Home from './components/home/Home.jsx';
+
+const LoginComponent = withTitle(`Sign in to ${R.strings.projectName}`)(Login);
+const RegistrationComponent = withTitle(`Join ${R.strings.projectName}`)(Registration);
+const HomeComponent = compose(
+	withTitle(`Home · ${R.strings.projectName}`),
+	withAuth
+)(Home);
 
 class App extends Component {
 	componentDidMount() {
-		this.props.getUsers();
+		setupAppConfigs();
 	}
-
-	createUsersList = () => {
-		const list = [];
-		const { users } = this.props;
-
-		if (_.isEmpty(users)) {
-			return list;
-		}
-
-		users.forEach(user => list.push(
-			<li key={user._id}>{user.name + ' ' + user.age}</li>)
-		);
-
-		return list;
-	};
-
-	openNotification = () => {
-		notification.success({
-			message: 'Hi, I\' Nazar - El Paso Garage administrator ;)',
-			description: 'So, welcome and feel free to use my app. See you soon!'
-		});
-	};
 
 	render() {
 		return (
 			<Router>
 				<div className="App">
 					<Header/>
-					<Link to={'/login'}>Log In</Link>
-					<Link to={'/registration'}>Sign In</Link>
-					<Button onClick={() => this.openNotification()}>Click here</Button>
-					<ol>
-						{this.createUsersList()}
-					</ol>
 					<Switch>
-						<Route path="/login" component={Login} />
-						<Route path="/registration" component={Registration} />
+						<Route path="/login" component={LoginComponent}/>
+						<Route path="/registration" component={RegistrationComponent}/>
+						<Route path="/home" component={HomeComponent}/>
 					</Switch>
 				</div>
 			</Router>
@@ -57,12 +39,12 @@ class App extends Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	users: state.users
-});
+// const mapStateToProps = state => ({
+// 	users: state.users
+// });
+//
+// const mapDispatchToProps = dispatch => ({
+// 	getUsers: () => dispatch(getUsersAction())
+// });
 
-const mapDispatchToProps = dispatch => ({
-	getUsers: () => dispatch(getUsersAction())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withTitle()(App);

@@ -1,0 +1,71 @@
+.loginWrapper {
+    width: 100%;
+}
+
+.loginWrapper .loginHeader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 5em 0 2em 0;
+}
+
+.loginWrapper .loginContent {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.loginForm {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formHeader h3 {
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -.5px;
+}
+
+.formBody {
+    width: 100%;
+    padding: 20px;
+    font-size: 14px;
+    background-color: #fff;
+    border: 1px solid #d8dee2;
+    border-radius: 5px;
+}
+
+.formFooter {
+    width: 100%;
+    margin-top: 1.5em;
+    padding: 15px 20px;
+    background-color: #fff;
+    border: 1px solid #d8dee2;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.formFooter p {
+    margin: 0 0.5em 0 0;
+}
+
+.formBody form label {
+    font-weight: 600;
+}
+
+.projectLogo {
+    border-radius: 50%;
+    background-color: #d2d2d2e0;
+    padding: 0.5em;
+    box-shadow: 0 0 15px 2px #a7a7a7;
+}
+
+.projectLogo a img {
+    width: 3em;
+    height: 3em;
+}
+

@@ -1,0 +1,76 @@
+.header {
+    width: 100%;
+    height: 4em;
+    box-shadow: 0 2px 8px #f0f1f2;
+    display: flex;
+    justify-content: center;
+}
+
+.header > div {
+    width: 70%;
+    display: flex;
+}
+
+.header .logo {
+    width: 30%;
+    height: 100%;
+    display: flex;
+}
+
+.header .logo a {
+    display: flex;
+    align-items: center;
+}
+
+.header .logo img {
+    width: 3em;
+    height: 3em;
+}
+
+.header .logo span {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 22px;
+    color: #000000;
+    font-weight: 400;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-variant: small-caps;
+    text-transform: capitalize;
+    margin-left: 1em;
+}
+
+.header .content {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.authenticationActions {
+    font-size: 16px;
+    display: flex;
+    height: 100%;
+}
+
+.authenticationActions div {
+    display: flex;
+    align-items: center;
+}
+
+.authenticationActions .signUpAction {
+    margin-left: 1.5em;
+}
+
+.authenticationActions .signUpAction a {
+    border: 1px solid #a5a5a5;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.authenticationActions div a {
+    color: #656565;
+}
+
+.authenticationActions div a:hover {
+    color: #040404;
+}
