@@ -4,6 +4,7 @@ import EpgLogo from '../../../assets/images/favicon.ico';
 import { Link, withRouter } from 'react-router-dom';
 import { Icon } from 'antd';
 import R from '../../res/R';
+import { connect } from 'react-redux';
 
 class Header extends Component {
 
@@ -13,6 +14,8 @@ class Header extends Component {
 	};
 
 	getHeaderTemplate = () => {
+		const { isAuthenticated } = this.props;
+
 		return (
 			<div className="header">
 				<div>
@@ -23,20 +26,26 @@ class Header extends Component {
 						</Link>
 					</div>
 					<div className="content">
-						<div className="authenticationActions">
-							<div className="signInAction">
-								<Link to={'/login'}>
-									<Icon type="user" style={{ fontSize: '22px' }}/>
-									Sign In
-								</Link>
-							</div>
-							<div className="signUpAction">
-								<Link to={'/registration'}>
-									<Icon type="user-add" style={{ fontSize: '22px' }}/>
-									Sign Up
-								</Link>
-							</div>
-						</div>
+						{
+							isAuthenticated ? (
+								<div>Logged user</div>
+							) : (
+								<div className="authenticationActions">
+									<div className="signInAction">
+										<Link to={'/login'}>
+											<Icon type="user" style={{ fontSize: '22px' }}/>
+											Sign In
+										</Link>
+									</div>
+									<div className="signUpAction">
+										<Link to={'/registration'}>
+											<Icon type="user-add" style={{ fontSize: '22px' }}/>
+											Sign Up
+										</Link>
+									</div>
+								</div>
+							)
+						}
 					</div>
 				</div>
 			</div>
@@ -48,4 +57,11 @@ class Header extends Component {
 	}
 }
 
-export default withRouter(Header);
+const mapStateToProps = state => {
+	const { isAuthenticated } = state.authentication;
+	return {
+		isAuthenticated
+	};
+};
+
+export default connect(mapStateToProps)(withRouter(Header));

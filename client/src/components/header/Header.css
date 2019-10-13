@@ -68,9 +68,9 @@
 }
 
 .authenticationActions div a {
-    color: #656565;
+    color: #040404;
 }
 
 .authenticationActions div a:hover {
-    color: #040404;
+    color: #656565;
 }

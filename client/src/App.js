@@ -13,10 +13,7 @@ import Home from './components/home/Home.jsx';
 
 const LoginComponent = withTitle(`Sign in to ${R.strings.projectName}`)(Login);
 const RegistrationComponent = withTitle(`Join ${R.strings.projectName}`)(Registration);
-const HomeComponent = compose(
-	withTitle(`Home · ${R.strings.projectName}`),
-	withAuth
-)(Home);
+const HomeComponent = withTitle(`Home · ${R.strings.projectName}`)(Home);
 
 class App extends Component {
 	componentDidMount() {
@@ -39,12 +36,4 @@ class App extends Component {
 	}
 }
 
-// const mapStateToProps = state => ({
-// 	users: state.users
-// });
-//
-// const mapDispatchToProps = dispatch => ({
-// 	getUsers: () => dispatch(getUsersAction())
-// });
-
-export default withTitle()(App);
+export default compose(withTitle(), withAuth)(App);

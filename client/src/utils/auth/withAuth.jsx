@@ -1,45 +1,32 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { authActions } from '../../actions/auth.actions';
+import { connect } from 'react-redux';
+import Spinner from '../../components/spinner/Spinner.jsx';
 
-const withAuth = ComponentToProtect =>
+const mapStateToProps = state => {
+	const { checkingToken } = state.authentication;
+	return { checkingToken };
+};
+
+const mapDispatchToProps = {
+	checkToken: authActions.checkToken
+};
+
+const withAuth = ComponentToProtect => connect(mapStateToProps, mapDispatchToProps)(
 	class extends Component {
-		constructor(props) {
-			super(props);
-			this.state = {
-				loading: true,
-				redirect: false,
-			};
-		}
-
 		componentDidMount() {
-			fetch('/api/checkToken')
-				.then(res => {
-					if (res.status === 200) {
-						this.setState({ loading: false });
-					} else {
-						throw new Error();
-					}
-				})
-				.catch(() => {
-					this.setState({ loading: false, redirect: true });
-				});
+			this.props.checkToken();
 		}
 
 		render() {
-			const { loading, redirect } = this.state;
+			const { checkingToken } = this.props;
 
-			if (loading) {
-				return null;
+			if (checkingToken) {
+				return <Spinner/>;
 			}
 
-			if (redirect) {
-				return <Redirect to="/login" />;
-			}
-
-			return (
-				<ComponentToProtect {...this.props} />
-			);
+			return <ComponentToProtect {...this.props} />;
 		}
-	};
+	});
 
 export { withAuth };

@@ -4,43 +4,22 @@ import { Link } from 'react-router-dom';
 import './Login.css';
 import R from '../../res/R';
 import WrappedLoginForm from './LoginForm.jsx';
-import { message } from 'antd';
+import { authActions } from '../../actions/auth.actions';
+import { connect } from 'react-redux';
 
 class Login extends Component {
 
-	getLoginOptions = (data) => {
-		return {
-			url: '/api/authenticate',
-			options: {
-				method: 'POST',
-				body: JSON.stringify(data),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}
-		};
-	};
-
-	loginUser = async ({ email, password }) => {
-		const { url, options } = this.getLoginOptions({ email, password });
-
-		fetch(url, options)
-			.then(res => {
-				if (res.status === 200) {
-					this.props.history.push('/');
-					return res.ok;
-				}
-				return res.json();
-			})
-			.then(res => {
-				if (res.error) {
-					message.error(res.error);
-				}
-			})
-			.catch(err => console.log(err));
+	loginUser = ({ email, password }) => {
+		this.props.loginUser({ email, password });
 	};
 
 	render() {
+		const { signingIn, isAuthenticated } = this.props;
+
+		if (isAuthenticated) {
+			this.props.history.push('/');
+		}
+
 		return (
 			<div className="loginWrapper">
 				<div className="loginHeader">
@@ -56,7 +35,7 @@ class Login extends Component {
 							<h3>Sign in to {R.strings.projectName}</h3>
 						</div>
 						<div className="formBody">
-							<WrappedLoginForm onSubmit={this.loginUser}/>
+							<WrappedLoginForm onSubmit={this.loginUser} signingIn={signingIn}/>
 						</div>
 						<div className="formFooter">
 							<p>New to {R.strings.projectName}?</p>
@@ -69,4 +48,16 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+const mapStateToProps = state => {
+	const { signingIn, isAuthenticated } = state.authentication;
+	return {
+		signingIn,
+		isAuthenticated
+	};
+};
+
+const mapDispatchToProps = {
+	loginUser: authActions.login
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

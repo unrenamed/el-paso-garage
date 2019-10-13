@@ -1,4 +1,4 @@
-export const getUsersAction = () => dispatch => {
+export const userActions = () => dispatch => {
     return fetch('/api/users')
         .then(res => res.json())
         .then(users => {
