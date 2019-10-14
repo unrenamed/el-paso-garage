@@ -22,7 +22,7 @@ const withAuth = ComponentToProtect => connect(mapStateToProps, mapDispatchToPro
 			const { checkingToken } = this.props;
 
 			if (checkingToken) {
-				return <Spinner/>;
+				return <Spinner />;
 			}
 
 			return <ComponentToProtect {...this.props} />;

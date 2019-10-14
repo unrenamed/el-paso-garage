@@ -1,0 +1,75 @@
+.registrationWrapper {
+    margin-top: 5em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.registrationHeader {
+    text-align: center;
+}
+
+.registrationHeader span {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace !important;
+}
+
+.registrationHeader h1 {
+    font-size: 40px !important;
+    font-weight: 600;
+    margin-top: 0.5em;
+}
+
+.registrationBody {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.registrationSteps .ant-steps-item .ant-steps-item-container .ant-steps-item-content .ant-steps-item-description {
+    max-width: 150px;
+}
+
+.registrationBody .stepsContent {
+    margin-top: 2em;
+    width: 50%;
+}
+
+.signUpStepWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signUpStepWrapper h2 {
+    font-weight: 600;
+}
+
+.signUpStepWrapper p {
+    margin: 1em 0 2em 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.stepActions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stepActions .signUpButton {
+    color: #fff;
+    font-weight: 600;
+    background-color: #28a745;
+    background-image: linear-gradient(-180deg, #34d058, #28a745 90%);
+    border-color: #28a745;
+}
+
+.stepActions .signUpButton:hover, .stepActions .signUpButton:focus {
+    background-color: #269f42;
+    background-image: linear-gradient(-180deg, #2fcb53, #269f42 90%);
+    background-position: -.5em;
+    border-color: #28a745;
+}

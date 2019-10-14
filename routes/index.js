@@ -6,11 +6,11 @@ const { User } = require('../models').models;
 
 /* POST register new user */
 router.post('/register', (req, res) => {
-	const { email, password, name, age } = req.body;
-	const user = new User({ email, password, name, age });
+	const { email, password, firstName, lastName, phoneNumber } = req.body;
+	const user = new User({ email, password, firstName, lastName, phoneNumber });
 	user.save((err) => {
 		if (err) {
-			res.status(500).send('Error registering new user. Please, try again!');
+			res.status(500).json({ error: 'Error registering new user. Please, try again!' });
 		} else {
 			res.status(200).send(`Successfully registered new user with email: ${email}`);
 		}

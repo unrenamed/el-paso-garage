@@ -9,6 +9,18 @@ const login = ({ email, password }) => {
 		.then(handleResponse);
 };
 
+const register = ({ email, password, firstName, lastName, phoneNumber }) => {
+	const user = { email, password, firstName, lastName, phoneNumber };
+	const requestOptions = {
+		method: 'POST',
+		body: JSON.stringify(user),
+		headers: { 'Content-Type': 'application/json' }
+	};
+
+	return fetch('/api/register', requestOptions)
+		.then(handleResponse);
+};
+
 const checkToken = () => {
 	return fetch('/api/checkToken')
 		.then(handleResponse);
@@ -27,5 +39,6 @@ const handleResponse = (response) => {
 
 export const authService = {
 	login,
+	register,
 	checkToken
 };

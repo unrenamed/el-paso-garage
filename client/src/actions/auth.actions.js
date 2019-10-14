@@ -16,6 +16,21 @@ const login = ({ email, password }) => dispatch => {
 	);
 };
 
+const register = (user, successCallback) => dispatch => {
+	dispatch({ type: authConstants.REGISTER_REQUEST });
+
+	authService.register(user).then(
+		() => {
+			dispatch({ type: authConstants.REGISTER_SUCCESS });
+			successCallback();
+		},
+		error => {
+			dispatch({ type: authConstants.REGISTER_FAILURE });
+			message.error(error);
+		}
+	);
+};
+
 const checkToken = () => dispatch => {
 	dispatch({ type: authConstants.CHECK_TOKEN_REQUEST });
 
@@ -31,5 +46,6 @@ const checkToken = () => dispatch => {
 
 export const authActions = {
 	login,
+	register,
 	checkToken
 };
