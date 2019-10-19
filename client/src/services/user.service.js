@@ -1,10 +1,5 @@
 import { utils } from '../utils/utils';
 
-const getLoggedUser = () => {
-	return fetch('/api/users/logged')
-		.then(handleResponse);
-};
-
 const checkUserNotExists = email => {
 	const params = utils.convertObjToUrlParams({ email });
 	return fetch(`/api/users/checkEmail?${params}`)
@@ -23,6 +18,5 @@ const handleResponse = response => response.text()
 
 
 export const userService = {
-	getLoggedUser,
 	checkUserNotExists
 };

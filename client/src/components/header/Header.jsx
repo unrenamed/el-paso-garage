@@ -4,19 +4,19 @@ import EpgLogo from '../../../assets/images/favicon.ico';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
 import R from '../../res/R';
-import { connect } from 'react-redux';
 
 class Header extends Component {
 
 	getLoggedUserTemplate = () => {
-		const { user } = this.props;
+		const { currentUser } = this.props;
 		return (
-			user ? <div>{`${user.firstName} ${user.lastName}`}</div> : null
+			currentUser ? <div>{`${currentUser.firstName} ${currentUser.lastName}`}</div> : null
 		);
 	};
 
 	render() {
-		const { isAuthenticated } = this.props;
+		const { currentUser } = this.props;
+
 		const userBlock = this.getLoggedUserTemplate();
 		return (
 			<div className="header">
@@ -29,7 +29,7 @@ class Header extends Component {
 					</div>
 					<div className="content">
 						{
-							isAuthenticated ? (
+							currentUser ? (
 								userBlock
 							) : (
 								<div className="authenticationActions">
@@ -55,10 +55,4 @@ class Header extends Component {
 	}
 }
 
-const mapStateToProps = state => {
-	const { isAuthenticated } = state.authentication;
-	const { user } = state.user;
-	return { isAuthenticated, user };
-};
-
-export default connect(mapStateToProps, null)(Header);
+export default Header;

@@ -21,24 +21,24 @@ const register = ({ email, password, firstName, lastName, phoneNumber }) => {
 		.then(handleResponse);
 };
 
-const checkToken = () => {
-	return fetch('/api/checkToken')
+const getLoggedUser = () => {
+	return fetch('/api/loggedUser')
 		.then(handleResponse);
 };
 
 const handleResponse = (response) => {
 	return response.text().then(text => {
+		const data = text && JSON.parse(text);
 		if (!response.ok) {
-			const data = text && JSON.parse(text);
 			const error = (data && (data.message || data.error)) || response.statusText;
 			return Promise.reject(error);
 		}
-		return response.ok;
+		return data;
 	});
 };
 
 export const authService = {
 	login,
 	register,
-	checkToken
+	getLoggedUser
 };

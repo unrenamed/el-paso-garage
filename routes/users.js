@@ -1,13 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const withAuth = require('./middleware');
 const { User } = require('../models').models;
-
-router.get('/logged', withAuth, (req, res) => {
-	User.findOne({ email: req.email }, { password: 0 }, (err, user) => {
-		res.json(user);
-	});
-});
 
 router.get('/checkEmail', (req, res) => {
 	const { email } = req.query;

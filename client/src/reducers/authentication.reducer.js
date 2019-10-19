@@ -1,9 +1,9 @@
 import { authConstants } from '../constants/auth.constants';
 
 const initialState = {
-	isAuthenticated: false,
+	currentUser: null,
 	signingIn: false,
-	checkingToken: false
+	loadingUser: true
 };
 
 export const authentication = (state = initialState, action) => {
@@ -14,27 +14,25 @@ export const authentication = (state = initialState, action) => {
 			};
 		case authConstants.LOGIN_SUCCESS:
 			return {
-				signingIn: false,
-				isAuthenticated: true
+				signingIn: false
 			};
 		case authConstants.LOGIN_FAILURE:
 			return {
-				signingIn: false,
-				isAuthenticated: false
+				signingIn: false
 			};
-		case authConstants.CHECK_TOKEN_REQUEST:
+		case authConstants.GET_LOGGED_USER_REQUEST:
 			return {
-				checkingToken: true,
+				loadingUser: true
 			};
-		case authConstants.CHECK_TOKEN_SUCCESS:
+		case authConstants.GET_LOGGED_USER_SUCCESS:
 			return {
-				checkingToken: false,
-				isAuthenticated: true
+				loadingUser: false,
+				currentUser: action.payload
 			};
-		case authConstants.CHECK_TOKEN_FAILURE:
+		case authConstants.GET_LOGGED_USER_FAILURE:
 			return {
-				checkingToken: false,
-				isAuthenticated: false
+				loadingUser: false,
+				currentUser: null
 			};
 		default:
 			return state;

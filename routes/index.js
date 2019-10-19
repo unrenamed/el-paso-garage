@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const withAuth = require('./middleware');
 const jwt = require('jsonwebtoken');
+const withAuth = require('./middleware');
 const { User } = require('../models').models;
 
 /* POST register new user */
@@ -12,7 +12,7 @@ router.post('/register', (req, res) => {
 		if (err) {
 			res.status(500).json({ error: 'Error registering new user. Please, try again!' });
 		} else {
-			res.status(200).send(`Successfully registered new user with email: ${email}`);
+			res.status(200).json({ message: `Successfully registered new user with email: ${email}` });
 		}
 	});
 });
@@ -36,17 +36,21 @@ router.post('/authenticate', (req, res) => {
 					const token = jwt.sign(payload, process.env.AUTH_SECRET, {
 						expiresIn: '1h'
 					});
-					res.cookie('token', token, { httpOnly: true }).sendStatus(200);
+					res.cookie('token', token, { httpOnly: true })
+						.status(200)
+						.json({ message: `Successfully authenticated user with e-mail: ${email}` });
 				}
 			});
 		}
 	});
 });
 
-router.get('/checkToken', withAuth, (req, res) => {
-	res.sendStatus(200);
+/* Get logged user */
+router.get('/loggedUser', withAuth, (req, res) => {
+	User.findOne({ email: req.email }, { password: 0 }, (err, user) => {
+		res.json(user);
+	});
 });
-
 
 const sendInternalServerError = (res) => {
 	res.status(500).json({ error: 'Internal server error. Please, try again.' });

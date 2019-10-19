@@ -1,8 +1,6 @@
 import { authConstants } from '../constants/auth.constants';
 import { authService } from '../services/auth.service';
 import { message } from 'antd';
-import { userService } from '../services/user.service';
-import { userActions } from './user.actions';
 
 const login = ({ email, password }) => dispatch => {
 	dispatch({ type: authConstants.LOGIN_REQUEST });
@@ -10,6 +8,7 @@ const login = ({ email, password }) => dispatch => {
 	authService.login({ email, password }).then(
 		() => {
 			dispatch({ type: authConstants.LOGIN_SUCCESS });
+			authActions.getLoggedUser()(dispatch);
 		},
 		error => {
 			dispatch({ type: authConstants.LOGIN_FAILURE });
@@ -33,16 +32,15 @@ const register = (user, successCallback) => dispatch => {
 	);
 };
 
-const checkToken = () => dispatch => {
-	dispatch({ type: authConstants.CHECK_TOKEN_REQUEST });
+const getLoggedUser = () => dispatch => {
+	dispatch({ type: authConstants.GET_LOGGED_USER_REQUEST });
 
-	authService.checkToken().then(
-		() => {
-			dispatch({ type: authConstants.CHECK_TOKEN_SUCCESS });
-			userActions.getLoggedUser()(dispatch);
+	authService.getLoggedUser().then(
+		user => {
+			dispatch({ type: authConstants.GET_LOGGED_USER_SUCCESS, payload: user });
 		},
-		() => {
-			dispatch({ type: authConstants.CHECK_TOKEN_FAILURE });
+		error => {
+			dispatch({ type: authConstants.GET_LOGGED_USER_FAILURE });
 		}
 	);
 };
@@ -50,5 +48,5 @@ const checkToken = () => dispatch => {
 export const authActions = {
 	login,
 	register,
-	checkToken
+	getLoggedUser
 };

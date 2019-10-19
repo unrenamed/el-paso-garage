@@ -7,6 +7,7 @@ import ProfileFormStep from './steps/ProfileStep.jsx';
 import SignUpStep from './steps/SignUpStep.jsx';
 import { authActions } from '../../actions/auth.actions';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const { Step } = Steps;
 
@@ -78,14 +79,13 @@ class Registration extends Component {
 	};
 
 	render() {
-		const { isAuthenticated } = this.props;
-
-		if (isAuthenticated) {
-			this.props.history.push('/');
-		}
-
 		const steps = this.getRegistrationSteps();
 		const { current } = this.state;
+		const { currentUser } = this.props;
+
+		if (currentUser) {
+			return <Redirect to="/"/>;
+		}
 
 		return (
 			<div className="registrationWrapper">
@@ -107,8 +107,11 @@ class Registration extends Component {
 }
 
 const mapStateToProps = state => {
-	const { isAuthenticated, signingUp } = { ...state.authentication, ...state.registration };
-	return { isAuthenticated, signingUp };
+	const { signingUp, currentUser } = {
+		...state.authentication,
+		...state.registration
+	};
+	return { signingUp, currentUser };
 };
 
 const mapDispatchToProps = {

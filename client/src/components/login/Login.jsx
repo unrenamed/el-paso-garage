@@ -14,10 +14,13 @@ class Login extends Component {
 	};
 
 	render() {
-		const { signingIn, isAuthenticated } = this.props;
-		return isAuthenticated ? (
-			<Redirect to="/"/>
-		) : (
+		const { signingIn, currentUser } = this.props;
+
+		if (currentUser) {
+			return <Redirect to="/"/>;
+		}
+
+		return (
 			<div className="loginWrapper">
 				<div className="loginHeader">
 					<div className="projectLogo">
@@ -46,11 +49,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => {
-	const { signingIn, isAuthenticated } = state.authentication;
-	return {
-		signingIn,
-		isAuthenticated
-	};
+	const { signingIn, currentUser } = state.authentication;
+	return { signingIn, currentUser };
 };
 
 const mapDispatchToProps = {
