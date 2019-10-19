@@ -34,13 +34,16 @@ class Registration extends Component {
 		{
 			title: 'Profile',
 			description: 'Setup profile settings.',
-			content: <ProfileFormStep onSuccessSubmit={this.submitProfileStep} user={this.state.user}
+			content: <ProfileFormStep onSuccessSubmit={this.submitProfileStep}
+									  user={this.state.user}
 									  onPrevClicked={this.prev}/>
 		},
 		{
 			title: 'Sign up',
 			description: 'Check your preferences and sign up.',
-			content: <SignUpStep user={this.state.user} signingUp={this.props.signingUp} onPrevClicked={this.prev}
+			content: <SignUpStep user={this.state.user}
+								 signingUp={this.props.signingUp}
+								 onPrevClicked={this.prev}
 								 onSignUpClicked={this.signUpUser}/>
 		},
 	];

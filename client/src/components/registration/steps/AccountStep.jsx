@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'antd';
+import { Button, Form, message } from 'antd';
 import Input from 'antd/lib/input';
+import { userActions } from '../../../actions/user.actions';
 
 class AccountStep extends Component {
 	state = {
@@ -11,7 +12,11 @@ class AccountStep extends Component {
 		e.preventDefault();
 		this.props.form.validateFieldsAndScroll((err, values) => {
 			if (!err) {
-				this.props.onSuccessSubmit(values);
+				const user = { ...values };
+				userActions.checkUserNotExists(user).then(
+					() => this.props.onSuccessSubmit(user),
+					error => message.error(error)
+				);
 			}
 		});
 	};

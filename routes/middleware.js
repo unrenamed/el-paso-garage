@@ -22,11 +22,11 @@ const withAuth = (req, res, next) => {
 };
 
 const sendInvalidTokenError = (res) => {
-    res.status(401).send('Unauthorized: Invalid token');
+    res.status(401).json({ error: 'Unauthorized: Invalid token' });
 };
 
 const sendNoTokenProvidedError = (res) => {
-    res.status(401).send('Unauthorized: No token provided');
+    res.status(401).json({ error: 'Unauthorized: No token provided' });
 };
 
 module.exports = withAuth;

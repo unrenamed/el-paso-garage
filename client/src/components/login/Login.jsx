@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import EpgLogo from '../../../assets/images/favicon.ico';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './Login.css';
 import R from '../../res/R';
 import WrappedLoginForm from './LoginForm.jsx';
@@ -15,12 +15,9 @@ class Login extends Component {
 
 	render() {
 		const { signingIn, isAuthenticated } = this.props;
-
-		if (isAuthenticated) {
-			this.props.history.push('/');
-		}
-
-		return (
+		return isAuthenticated ? (
+			<Redirect to="/"/>
+		) : (
 			<div className="loginWrapper">
 				<div className="loginHeader">
 					<div className="projectLogo">

@@ -1,6 +1,8 @@
 import { authConstants } from '../constants/auth.constants';
 import { authService } from '../services/auth.service';
 import { message } from 'antd';
+import { userService } from '../services/user.service';
+import { userActions } from './user.actions';
 
 const login = ({ email, password }) => dispatch => {
 	dispatch({ type: authConstants.LOGIN_REQUEST });
@@ -37,6 +39,7 @@ const checkToken = () => dispatch => {
 	authService.checkToken().then(
 		() => {
 			dispatch({ type: authConstants.CHECK_TOKEN_SUCCESS });
+			userActions.getLoggedUser()(dispatch);
 		},
 		() => {
 			dispatch({ type: authConstants.CHECK_TOKEN_FAILURE });

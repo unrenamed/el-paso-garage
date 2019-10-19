@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import './Header.css';
 import EpgLogo from '../../../assets/images/favicon.ico';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
 import R from '../../res/R';
 import { connect } from 'react-redux';
 
 class Header extends Component {
 
-	notVisible = () => {
-		const { location } = this.props;
-		return location.pathname.match('/login');
+	getLoggedUserTemplate = () => {
+		const { user } = this.props;
+		return (
+			user ? <div>{`${user.firstName} ${user.lastName}`}</div> : null
+		);
 	};
 
-	getHeaderTemplate = () => {
+	render() {
 		const { isAuthenticated } = this.props;
-
+		const userBlock = this.getLoggedUserTemplate();
 		return (
 			<div className="header">
 				<div>
@@ -28,7 +30,7 @@ class Header extends Component {
 					<div className="content">
 						{
 							isAuthenticated ? (
-								<div>Logged user</div>
+								userBlock
 							) : (
 								<div className="authenticationActions">
 									<div className="signInAction">
@@ -50,18 +52,13 @@ class Header extends Component {
 				</div>
 			</div>
 		);
-	};
-
-	render() {
-		return this.notVisible() ? null : this.getHeaderTemplate();
 	}
 }
 
 const mapStateToProps = state => {
 	const { isAuthenticated } = state.authentication;
-	return {
-		isAuthenticated
-	};
+	const { user } = state.user;
+	return { isAuthenticated, user };
 };
 
-export default connect(mapStateToProps)(withRouter(Header));
+export default connect(mapStateToProps, null)(Header);
