@@ -44,7 +44,7 @@ class LoginForm extends Component {
 				</Form.Item>
 				<Form.Item className="signInButton">
 					<Button type="primary" htmlType="submit" className="login-form-button" loading={signingIn}>
-						Sign in
+						{ signingIn ? 'Signing in' : 'Sign in' }
 					</Button>
 				</Form.Item>
 			</Form>
