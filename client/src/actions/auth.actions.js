@@ -45,8 +45,22 @@ const getLoggedUser = () => dispatch => {
 	);
 };
 
+const logout = () => dispatch => {
+	dispatch({ type: authConstants.LOGOUT_REQUEST });
+
+	authService.logout().then(
+		() => {
+			dispatch({ type: authConstants.LOGOUT_SUCCESS });
+		},
+		() => {
+			dispatch({ type: authConstants.LOGOUT_FAILURE });
+		}
+	);
+};
+
 export const authActions = {
 	login,
+	logout,
 	register,
 	getLoggedUser
 };

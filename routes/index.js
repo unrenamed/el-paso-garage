@@ -45,11 +45,17 @@ router.post('/authenticate', (req, res) => {
 	});
 });
 
-/* Get logged user */
+/* GET logged user */
 router.get('/loggedUser', withAuth, (req, res) => {
 	User.findOne({ email: req.email }, { password: 0 }, (err, user) => {
 		res.json(user);
 	});
+});
+
+/* POST logout user */
+router.post('/logout', withAuth, (req, res) => {
+	res.clearCookie('token');
+	res.status(200).json({ message: 'Successfully logged out user session.' });
 });
 
 const sendInternalServerError = (res) => {

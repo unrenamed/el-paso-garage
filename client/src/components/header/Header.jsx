@@ -2,15 +2,22 @@ import React, { Component } from 'react';
 import './Header.css';
 import EpgLogo from '../../../assets/images/favicon.ico';
 import { Link } from 'react-router-dom';
-import { Icon } from 'antd';
+import { Button, Icon } from 'antd';
 import R from '../../res/R';
+import { authActions } from '../../actions/auth.actions';
+import { connect } from 'react-redux';
 
 class Header extends Component {
 
 	getLoggedUserTemplate = () => {
-		const { currentUser } = this.props;
+		const { currentUser, logout } = this.props;
 		return (
-			currentUser ? <div>{`${currentUser.firstName} ${currentUser.lastName}`}</div> : null
+			currentUser ?
+				<div className="userBlock">
+					<span className="userProfile">{`${currentUser.firstName} ${currentUser.lastName}`}</span>
+					<Button className="logoutBtn" onClick={() => logout()}>Logout</Button>
+				</div>
+				: null
 		);
 	};
 
@@ -55,4 +62,8 @@ class Header extends Component {
 	}
 }
 
-export default Header;
+const mapDispatchToProps = {
+	logout: authActions.logout
+};
+
+export default connect(null, mapDispatchToProps)(Header);

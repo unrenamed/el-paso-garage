@@ -3,7 +3,8 @@ import { authConstants } from '../constants/auth.constants';
 const initialState = {
 	currentUser: null,
 	signingIn: false,
-	loadingUser: true
+	loadingUser: true,
+	signingOut: false
 };
 
 export const authentication = (state = initialState, action) => {
@@ -33,6 +34,19 @@ export const authentication = (state = initialState, action) => {
 			return {
 				loadingUser: false,
 				currentUser: null
+			};
+		case authConstants.LOGOUT_REQUEST:
+			return {
+				signingOut: true
+			};
+		case authConstants.LOGOUT_SUCCESS:
+			return {
+				signingOut: false,
+				currentUser: null
+			};
+		case authConstants.LOGOUT_FAILURE:
+			return {
+				signingOut: false
 			};
 		default:
 			return state;

@@ -36,20 +36,21 @@ class App extends Component {
 				<React.Fragment>
 					<Header currentUser={currentUser}/>
 					<Route path="/registration" component={RegistrationComponent}/>
-					<PrivateRoute path="/home" loadingUser={loadingUser} currentUser={currentUser} component={HomeComponent}/>
+					<PrivateRoute path="/home" loadingUser={loadingUser} currentUser={currentUser}
+								  component={HomeComponent}/>
 				</React.Fragment>
 			</Switch>
 		);
 	};
 
 	render() {
-		const { loadingUser } = this.props;
+		const { loadingUser, signingOut } = this.props;
 
 		return (
 			<Router>
 				<div className="App">
 					{
-						loadingUser ? <Spinner/> : this.getRoutesTemplate()
+						loadingUser || signingOut ? <Spinner/> : this.getRoutesTemplate()
 					}
 				</div>
 			</Router>
@@ -58,11 +59,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-	const { currentUser, loadingUser } = state.authentication;
+	const { currentUser, loadingUser, signingOut } = state.authentication;
 
 	return {
 		currentUser,
-		loadingUser
+		loadingUser,
+		signingOut
 	};
 };
 

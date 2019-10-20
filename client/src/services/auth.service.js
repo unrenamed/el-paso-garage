@@ -26,6 +26,11 @@ const getLoggedUser = () => {
 		.then(handleResponse);
 };
 
+const logout = () => {
+	return fetch('/api/logout', { method: 'POST' })
+		.then(handleResponse);
+};
+
 const handleResponse = (response) => {
 	return response.text().then(text => {
 		const data = text && JSON.parse(text);
@@ -39,6 +44,7 @@ const handleResponse = (response) => {
 
 export const authService = {
 	login,
+	logout,
 	register,
 	getLoggedUser
 };
