@@ -1,0 +1,11 @@
+.servicesWrapper {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.servicesWrapper .ant-card {
+    margin-top: 2em;
+}

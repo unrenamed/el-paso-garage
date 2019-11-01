@@ -37,6 +37,7 @@ class App extends Component {
 				<Route path="/login" component={LoginComponent}/>
 				<React.Fragment>
 					<Header currentUser={currentUser}/>
+					<Route exact path="/" render={(props) => <HomeComponent {...props} currentUser={currentUser}/>} />
 					<Route path="/registration" component={RegistrationComponent}/>
 					<PrivateRoute path="/home" loadingUser={loadingUser} currentUser={currentUser} component={HomeComponent} />
 					<PrivateRoute path="/my-orders" loadingUser={loadingUser} currentUser={currentUser} component={UserOrdersComponent} />
