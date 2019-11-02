@@ -5,6 +5,10 @@
     display: flex;
     justify-content: center;
     font-size: 14px;
+    position: fixed;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: 99999;
 }
 
 .header > div {
@@ -15,10 +19,6 @@
 .header .logo {
     width: 30%;
     height: 100%;
-    display: flex;
-}
-
-.header .logo a {
     display: flex;
     align-items: center;
 }
@@ -49,10 +49,10 @@
 
 .header .userBlock {
     height: 100%;
-    width: 100%;
     display: flex;;
     justify-content: flex-end;
     align-items: center;
+    margin-left: 3em;
 }
 
 .authenticationActions {
@@ -83,7 +83,7 @@
 }
 
 .authenticationActions div i {
-   margin-right: 0.1em;
+    margin-right: 0.1em;
 }
 
 .authenticationActions div a:hover {
@@ -91,20 +91,22 @@
     border-color: #40a9ff;
 }
 
-.userBlock .userProfile {
-    margin-left: 3em;
-}
-
 .userBlock .userProfile .userName {
     margin-right: 1em;
 }
 
-.userBlock .ant-menu-horizontal {
+.ant-menu-horizontal {
     line-height: 50px;
-    margin-top: 5px;
     border-bottom: none;
+    background: inherit;
 }
 
-.userBlock .ant-menu .ant-menu-item {
+.ant-menu .ant-menu-item {
     padding: 0 1em;
+}
+
+.ant-menu .ant-menu-item a {
+    display: flex;
+    align-items: center;
+    padding: 0.2em 0;
 }

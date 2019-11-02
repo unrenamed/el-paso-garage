@@ -1,11 +1,40 @@
-.servicesWrapper {
-    width: 70%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+.homeComponent {
+    width: 100%;
 }
 
-.servicesWrapper .ant-card {
-    margin-top: 2em;
+.homeComponent .banner {
+    width: 100%;
+    height: 510px;
+    background-image: url(../../../assets/images/home-background.jpg);
+    background-position: center;
+}
+
+.homeComponent .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.homeComponent .content .splitter {
+    background-color: #4390ff;
+    width: 100%;
+    height: 0.5em;
+}
+
+.homeComponent .content .contentHeader {
+    margin-top: 1em;
+    margin-bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-variant: small-caps;
+}
+
+.homeComponent .content .contentBody {
+    width: 70%;
+}
+
+.homeComponent .content .contentBody p {
+    text-align: justify;
 }

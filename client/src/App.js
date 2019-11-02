@@ -13,10 +13,12 @@ import Registration from './components/registration/Registration.jsx';
 import Home from './components/home/Home.jsx';
 import Spinner from './components/spinner/Spinner.jsx';
 import UserOrders from './components/user/orders/UserOrders.jsx';
+import About from './components/about/About.jsx';
 
 const LoginComponent = withTitle(`Sign in to ${R.strings.projectName}`)(Login);
 const RegistrationComponent = withTitle(`Join ${R.strings.projectName}`)(Registration);
 const HomeComponent = withTitle(`Home · ${R.strings.projectName}`)(Home);
+const AboutComponent = withTitle(`About us · ${R.strings.projectName}`)(About);
 const UserOrdersComponent = withTitle(`My orders · ${R.strings.projectName}`)(UserOrders);
 
 class App extends Component {
@@ -37,10 +39,11 @@ class App extends Component {
 				<Route path="/login" component={LoginComponent}/>
 				<React.Fragment>
 					<Header currentUser={currentUser}/>
-					<Route exact path="/" render={(props) => <HomeComponent {...props} currentUser={currentUser}/>} />
+					<Route exact path="/" render={(props) => <HomeComponent {...props} currentUser={currentUser}/>}/>
+					<Route path="/about-us" component={AboutComponent}/>
 					<Route path="/registration" component={RegistrationComponent}/>
-					<PrivateRoute path="/home" loadingUser={loadingUser} currentUser={currentUser} component={HomeComponent} />
-					<PrivateRoute path="/my-orders" loadingUser={loadingUser} currentUser={currentUser} component={UserOrdersComponent} />
+					<PrivateRoute path="/my-orders" loadingUser={loadingUser} currentUser={currentUser}
+								  component={UserOrdersComponent}/>
 				</React.Fragment>
 			</Switch>
 		);
