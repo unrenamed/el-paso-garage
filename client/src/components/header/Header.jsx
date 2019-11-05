@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Header.css';
 import EpgLogo from '../../../assets/images/favicon.ico';
 import { Link, withRouter } from 'react-router-dom';
-import { Button, Icon, Menu } from 'antd';
+import { Button, Icon, Menu, Tag } from 'antd';
 import R from '../../res/R';
 import { authActions } from '../../actions/auth.actions';
 import { connect } from 'react-redux';
@@ -22,6 +22,10 @@ class Header extends Component {
 
 		const selectedMenuItemUrlPath = urlPath.split('/').slice(0, 2).join('/');
 		let selectedItem = getHeaderMenuItems().find(item => item.linkTo === selectedMenuItemUrlPath);
+
+		if (!selectedItem) {
+			return null;
+		}
 
 		if (selectedItem.subItems && selectedItem.subItems.length > 0) {
 			const selectedMenuSubItemUrlPath = urlPath.split('/').slice(0, 3).join('/');
@@ -67,13 +71,21 @@ class Header extends Component {
 										}
 									>
 										{
-											item.subItems.map(subItem =>
-												<Menu.Item key={subItem.key}>
-													<Link to={subItem.linkTo}>
-														{subItem.itemText}
-													</Link>
-												</Menu.Item>
-											)
+											item.subItems.map(subItem => {
+												if (this.isMenuItemNotVisible(subItem)) {
+													return null;
+												}
+
+												return (
+													<Menu.Item key={subItem.key}>
+														<Link to={subItem.linkTo}
+															  style={{ display: 'flex', justifyContent: 'space-between' }}>
+															<span style={{ marginRight: '1em' }}>{subItem.itemText}</span>
+															{subItem.withAuth ? <Tag color="gold">Premium</Tag> : null}
+														</Link>
+													</Menu.Item>
+												);
+											})
 										}
 									</Menu.SubMenu>
 								);

@@ -1,11 +1,14 @@
 export const HeaderMenuEnum = {
 	HOME: 'HOME',
 	ABOUT_US: 'ABOUT_US',
-	SERVICES: 'SERVICES',
 	MY_ORDERS: 'MY_ORDERS',
-	SERVICES_OIL_CHANGE: 'SERVICES_OIL_CHANGE',
-	SERVICES_BRAKES: 'SERVICES_BRAKES',
-	SERVICES_STANDARD_MAINTENANCE: 'SERVICES_STANDARD_MAINTENANCE'
+	SERVICES: 'SERVICES',
+
+	STANDARD_MAINTENANCE_SERVICE: 'STANDARD_MAINTENANCE_SERVICE',
+	TIRE_SERVICE: 'TIRE_SERVICE',
+	EXHAUST_SERVICE: 'EXHAUST_SERVICE',
+	ENGINE_SERVICE: 'ENGINE_SERVICE',
+	AUTO_ELECTRICAL_SERVICE: 'AUTO_ELECTRICAL_SERVICE'
 };
 
 export const HomeMenuItem = {
@@ -31,13 +34,36 @@ export const ServicesMenuItem = {
 	itemText: 'Services',
 	withAuth: false,
 	subItems: [
-		{ key: HeaderMenuEnum.SERVICES_OIL_CHANGE, itemText: 'Oil change', linkTo: '/services/oil-change' },
-		{ key: HeaderMenuEnum.SERVICES_BRAKES, itemText: 'Brakes', linkTo: '/services/brakes' },
 		{
-			key: HeaderMenuEnum.SERVICES_STANDARD_MAINTENANCE,
+			key: HeaderMenuEnum.STANDARD_MAINTENANCE_SERVICE,
 			itemText: 'Standard maintenance',
-			linkTo: '/services/standard-maintenance'
+			linkTo: '/services/standard-maintenance',
+			withAuth: false
 		},
+		{
+			key: HeaderMenuEnum.TIRE_SERVICE,
+			itemText: 'Tire service',
+			linkTo: '/services/tire',
+			withAuth: false
+		},
+		{
+			key: HeaderMenuEnum.EXHAUST_SERVICE,
+			itemText: 'Exhaust service',
+			linkTo: '/services/exhaust',
+			withAuth: false
+		},
+		{
+			key: HeaderMenuEnum.ENGINE_SERVICE,
+			itemText: 'Engine service',
+			linkTo: '/services/engine',
+			withAuth: true
+		},
+		{
+			key: HeaderMenuEnum.AUTO_ELECTRICAL_SERVICE,
+			itemText: 'Auto electrical service',
+			linkTo: '/services/auto-electrical',
+			withAuth: true
+		}
 	]
 };
 
