@@ -1,0 +1,73 @@
+.autoServicesComponent {
+    margin-top: 6em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 4em;
+}
+
+.autoServicesComponent h2 {
+    text-align: center;
+    margin-bottom: 1em;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 25px;
+    font-variant: small-caps;
+    text-transform: capitalize;
+}
+
+.autoServicesWrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+.autoServicesWrapper .cardAction {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.autoServicesWrapper .ant-card {
+    cursor: auto;
+}
+
+.autoServicesWrapper .ant-card .ant-card-actions {
+    background-color: #484848;
+    color: #ffffff;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.autoServicesWrapper .ant-card .ant-card-actions > li {
+    color: inherit;
+}
+
+.autoServicesWrapper .ant-card .ant-card-actions > li > span:hover {
+    transition: none;
+    background-color: inherit;
+    color: inherit;
+}
+
+.autoServicesWrapper .ant-card .ant-card-actions:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.autoServicesWrapper .cardAction i {
+    font-size: 18px;
+    margin-right: 0.5em;
+}
+
+.autoServicesWrapper .ant-card-cover {
+    height: 250px;
+}
+
+.serviceThumbnail {
+    height: inherit;
+    object-fit: cover;
+    object-position: center;
+}

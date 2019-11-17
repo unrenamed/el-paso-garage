@@ -37,31 +37,31 @@ export const ServicesMenuItem = {
 		{
 			key: HeaderMenuEnum.STANDARD_MAINTENANCE_SERVICE,
 			itemText: 'Standard maintenance',
-			linkTo: '/services/standard-maintenance',
+			linkTo: '/standard-maintenance',
 			withAuth: false
 		},
 		{
 			key: HeaderMenuEnum.TIRE_SERVICE,
 			itemText: 'Tire service',
-			linkTo: '/services/tire',
+			linkTo: '/tire',
 			withAuth: false
 		},
 		{
 			key: HeaderMenuEnum.EXHAUST_SERVICE,
 			itemText: 'Exhaust service',
-			linkTo: '/services/exhaust',
+			linkTo: '/exhaust',
 			withAuth: false
 		},
 		{
 			key: HeaderMenuEnum.ENGINE_SERVICE,
 			itemText: 'Engine service',
-			linkTo: '/services/engine',
+			linkTo: '/engine',
 			withAuth: true
 		},
 		{
 			key: HeaderMenuEnum.AUTO_ELECTRICAL_SERVICE,
 			itemText: 'Auto electrical service',
-			linkTo: '/services/auto-electrical',
+			linkTo: '/auto-electrical',
 			withAuth: true
 		}
 	]

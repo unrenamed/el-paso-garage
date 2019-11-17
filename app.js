@@ -7,6 +7,7 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const servicesRouter = require('./routes/services');
+const ordersRouter = require('./routes/orders');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'client/dist')));
 app.use('/api/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/services', servicesRouter);
+app.use('/api/orders', ordersRouter);
 
 app.get('/*', (req, res, next) => {
 	if (isProductionEnv && !isApiUrl(req.url)) {

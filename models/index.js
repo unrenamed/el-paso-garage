@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const User = require('./user');
 const Service = require('./service');
+const Order = require('./order');
+const ExternalUser = require('./externalUser');
 
 const connectToDb = () => {
 	mongoose.set('useNewUrlParser', true);
@@ -10,7 +12,7 @@ const connectToDb = () => {
 	return mongoose.connect(process.env.DATABASE_URL);
 };
 
-const models = { User, Service };
+const models = { User, Service, Order, ExternalUser };
 
 module.exports = {
 	connectToDb,

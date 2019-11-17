@@ -10,9 +10,9 @@ const storage = new GridFsStorage({
 				if (err) {
 					return reject(err);
 				}
-				const filename = file.originalname;
+				const filenameWithoutExtension = file.originalname.split('.')[0];
 				const fileInfo = {
-					filename: filename,
+					filename: filenameWithoutExtension,
 					bucketName: 'thumbnails',
 				};
 				resolve(fileInfo);

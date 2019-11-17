@@ -42,7 +42,7 @@ class About extends Component {
 						praesent semper feugiat nibh.</p>
 				</div>
 				<div className="infoWrapper">
-					<Card title="Contact us" style={{ width: 300 }}>
+					<Card title="Contact us" style={{ width: 350 }}>
 						<p>
 							<Icon type="home" style={{ fontSize: '22px' }}/>
 							Earth, Mexico, El Paso, Real Address 110/2
@@ -56,7 +56,7 @@ class About extends Component {
 							el-paso-garage-mail@mail.com
 						</p>
 					</Card>
-					<Card title="Business hours" style={{ width: 300, marginTop: '2em' }}>
+					<Card title="Business hours" style={{ width: 350, marginTop: '2em' }}>
 						<Timeline>
 							<Timeline.Item color="green">Monday: 7:30 am - 5:00 pm</Timeline.Item>
 							<Timeline.Item color="green">Tuesday: 7:30 am - 5:00 pm</Timeline.Item>

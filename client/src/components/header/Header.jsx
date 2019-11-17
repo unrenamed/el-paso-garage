@@ -6,7 +6,7 @@ import { Button, Icon, Menu, Tag } from 'antd';
 import R from '../../res/R';
 import { authActions } from '../../actions/auth.actions';
 import { connect } from 'react-redux';
-import { getHeaderMenuItems } from '../../constants/header-menu.constants';
+import { getHeaderMenuItems, HeaderMenuEnum } from '../../constants/header-menu.constants';
 
 class Header extends Component {
 	constructor(props) {
@@ -19,20 +19,25 @@ class Header extends Component {
 
 	getSelectedMenuItemKey = () => {
 		const urlPath = this.props.location.pathname;
+		const defaultItem = HeaderMenuEnum.HOME;
 
 		const selectedMenuItemUrlPath = urlPath.split('/').slice(0, 2).join('/');
 		let selectedItem = getHeaderMenuItems().find(item => item.linkTo === selectedMenuItemUrlPath);
 
 		if (!selectedItem) {
-			return null;
+			return defaultItem;
 		}
 
 		if (selectedItem.subItems && selectedItem.subItems.length > 0) {
-			const selectedMenuSubItemUrlPath = urlPath.split('/').slice(0, 3).join('/');
+			const selectedMenuSubItemUrlPath = `/${urlPath.split('/').slice(2, 3)}`;
 			selectedItem = selectedItem.subItems.find(subItem => subItem.linkTo === selectedMenuSubItemUrlPath);
 		}
 
-		return selectedItem ? selectedItem.key : null;
+		if (!selectedItem || (selectedItem.withAuth && !this.props.currentUser)) {
+			return defaultItem;
+		}
+
+		return selectedItem.key;
 	};
 
 	handleClick = e => {
@@ -78,7 +83,7 @@ class Header extends Component {
 
 												return (
 													<Menu.Item key={subItem.key}>
-														<Link to={subItem.linkTo}
+														<Link to={`${item.linkTo}${subItem.linkTo}`}
 															  style={{ display: 'flex', justifyContent: 'space-between' }}>
 															<span style={{ marginRight: '1em' }}>{subItem.itemText}</span>
 															{subItem.withAuth ? <Tag color="gold">Premium</Tag> : null}
