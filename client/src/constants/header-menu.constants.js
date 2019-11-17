@@ -70,7 +70,7 @@ export const ServicesMenuItem = {
 export const MyOrdersMenuItem = {
 	key: HeaderMenuEnum.MY_ORDERS,
 	linkTo: '/my-orders',
-	iconType: 'inbox',
+	iconType: 'dropbox',
 	itemText: 'My orders',
 	withAuth: true
 };

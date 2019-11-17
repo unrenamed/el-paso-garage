@@ -1,0 +1,5 @@
+module.exports = {
+	IN_PROGRESS: 'IN_PROGRESS',
+	PLANNED: 'PLANNED',
+	ARCHIVED: 'ARCHIVED'
+};

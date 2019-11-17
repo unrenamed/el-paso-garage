@@ -1,0 +1,5 @@
+export const OrderTypes = {
+	IN_PROGRESS: 'IN_PROGRESS',
+	PLANNED: 'PLANNED',
+	ARCHIVED: 'ARCHIVED'
+};

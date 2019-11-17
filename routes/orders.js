@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const moment = require('moment');
+const withAuth = require('./middleware');
 const { Order, ExternalUser, Service } = require('../models').models;
+const OrderTypes = require('../utils/orderTypes.constants');
+const { ITEMS_PER_PAGE } = require('../utils/pageable.constants');
 
 router.post('/', (req, res) => {
 	const orderRequest = req.body;
@@ -29,6 +32,70 @@ router.post('/', (req, res) => {
 		}
 	});
 });
+
+router.get('/', withAuth, (req, res) => {
+	const type = req.query.type;
+	const page = req.query.page ? req.query.page : 0;
+	const userEmail = req.email;
+
+	let filter = {};
+	const now = moment().toDate();
+
+	switch (type) {
+		case OrderTypes.IN_PROGRESS:
+			filter = { ...filter, startDate: { $lte: now }, endDate: { $gte: now } };
+			returnOrders(page, filter, userEmail, res);
+			break;
+		case OrderTypes.PLANNED:
+			filter = { ...filter, startDate: { $gte: now } };
+			returnOrders(page, filter, userEmail, res);
+			break;
+		case OrderTypes.ARCHIVED:
+			filter = { ...filter, endDate: { $lte: now } };
+			returnOrders(page, filter, userEmail, res);
+			break;
+		default:
+			res.status(200).json({ orders: [] });
+			break;
+	}
+});
+
+const returnOrders = (page, filter, userEmail, res) => {
+	getCountOfOrders(filter, userEmail, res)
+		.exec((err, count) => {
+			if (err)
+				sendInternalServerError(res);
+			else {
+				Order.find(filter)
+					.populate('serviceId', 'title price')
+					.populate({
+						path: 'userId',
+						select: 'email',
+						match: { email: userEmail }
+					})
+					.limit(ITEMS_PER_PAGE)
+					.skip(ITEMS_PER_PAGE * page)
+					.sort({ startDate: 'desc' })
+					.exec((err, orders) => {
+						if (err)
+							sendInternalServerError(res);
+						else {
+							const pageCount = Math.ceil(count / ITEMS_PER_PAGE);
+							res.status(200).json({ orders, pageCount });
+						}
+					});
+			}
+		});
+};
+
+const getCountOfOrders = (filter, userEmail) => {
+	return Order.countDocuments(filter)
+		.populate('serviceId', 'title price')
+		.populate({
+			path: 'userId',
+			match: { email: userEmail }
+		});
+};
 
 const validateOrder = order => {
 	const { startDate } = order;

@@ -1,0 +1,25 @@
+.listContent {
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.listContent .orderInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.listContent .orderProgress {
+    width: 30%;
+}
+
+.ant-list-item-meta-title {
+    font-weight: bold;
+    color: #000000;
+}
+
+.ant-list-item-meta-description {
+    color: #4390ff;
+}
+

@@ -9,6 +9,11 @@ const saveOrder = order => {
 		.then(handleResponse);
 };
 
+const getUserOrders = (page, type) => {
+	return fetch(`/api/orders?page=${page}&type=${type}`)
+		.then(handleResponse);
+};
+
 const handleResponse = (response) => {
 	return response.text().then(text => {
 		const data = text && JSON.parse(text);
@@ -21,5 +26,6 @@ const handleResponse = (response) => {
 };
 
 export const orderService = {
-	saveOrder
+	saveOrder,
+	getUserOrders
 };

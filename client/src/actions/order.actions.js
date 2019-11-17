@@ -1,7 +1,8 @@
 import { orderService } from '../services/order.service';
 import { orderConstants } from '../constants/order.constants';
-import { notification } from 'antd';
+import { message, notification } from 'antd';
 import moment from 'moment';
+import { OrderTypes } from '../constants/order-types.constants';
 
 const saveOrder = (order, onSuccessCallback) => dispatch => {
 	dispatch({ type: orderConstants.SAVE_ORDER_REQUEST });
@@ -23,6 +24,89 @@ const saveOrder = (order, onSuccessCallback) => dispatch => {
 	);
 };
 
+const getOrders = (page, type, isInitLoading) => dispatch => {
+	switch (type) {
+		case OrderTypes.IN_PROGRESS:
+			getOrdersInProgress(page, isInitLoading)(dispatch);
+			break;
+		case OrderTypes.PLANNED:
+			getPlannedOrders(page, isInitLoading)(dispatch);
+			break;
+		case OrderTypes.ARCHIVED:
+			getArchivedOrders(page, isInitLoading)(dispatch);
+			break;
+		default:
+			break;
+	}
+};
+
+const getOrdersInProgress = (page, isInitLoading) => dispatch => {
+	dispatch({ type: orderConstants.GET_IN_PROGRESS_ORDERS_REQUEST });
+
+	orderService.getUserOrders(page, OrderTypes.IN_PROGRESS).then(
+		result => {
+			dispatch({
+				type: orderConstants.GET_IN_PROGRESS_ORDERS_SUCCESS,
+				payload: {
+					orders: result.orders,
+					pageCount: result.pageCount,
+					isInitLoading,
+					page
+				}
+			});
+		},
+		error => {
+			dispatch({ type: orderConstants.GET_IN_PROGRESS_ORDERS_FAILURE });
+			message.error(error);
+		}
+	);
+};
+
+const getPlannedOrders = (page, isInitLoading) => dispatch => {
+	dispatch({ type: orderConstants.GET_PLANNED_ORDERS_REQUEST });
+
+	orderService.getUserOrders(page, OrderTypes.PLANNED).then(
+		result => {
+			dispatch({
+				type: orderConstants.GET_PLANNED_ORDERS_SUCCESS,
+				payload: {
+					orders: result.orders,
+					pageCount: result.pageCount,
+					isInitLoading,
+					page
+				}
+			});
+		},
+		error => {
+			dispatch({ type: orderConstants.GET_PLANNED_ORDERS_FAILURE });
+			message.error(error);
+		}
+	);
+};
+
+const getArchivedOrders = (page, isInitLoading) => dispatch => {
+	dispatch({ type: orderConstants.GET_ARCHIVED_ORDERS_REQUEST });
+
+	orderService.getUserOrders(page, OrderTypes.ARCHIVED).then(
+		result => {
+			dispatch({
+				type: orderConstants.GET_ARCHIVED_ORDERS_SUCCESS,
+				payload: {
+					orders: result.orders,
+					pageCount: result.pageCount,
+					isInitLoading,
+					page
+				}
+			});
+		},
+		error => {
+			dispatch({ type: orderConstants.GET_ARCHIVED_ORDERS_FAILURE });
+			message.error(error);
+		}
+	);
+};
+
 export const orderActions = {
-	saveOrder
+	saveOrder,
+	getOrders
 };
