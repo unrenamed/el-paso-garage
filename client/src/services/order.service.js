@@ -14,6 +14,11 @@ const getUserOrders = (page, type) => {
 		.then(handleResponse);
 };
 
+const deleteUserOrders = orderId => {
+	return fetch(`/api/orders/${orderId}`, { method: 'DELETE' })
+		.then(handleResponse);
+};
+
 const handleResponse = (response) => {
 	return response.text().then(text => {
 		const data = text && JSON.parse(text);
@@ -27,5 +32,6 @@ const handleResponse = (response) => {
 
 export const orderService = {
 	saveOrder,
-	getUserOrders
+	getUserOrders,
+	deleteUserOrders
 };

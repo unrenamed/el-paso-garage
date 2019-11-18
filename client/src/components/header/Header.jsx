@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Header.css';
 import EpgLogo from '../../../assets/images/favicon.ico';
 import { Link, withRouter } from 'react-router-dom';
-import { Button, Icon, Menu, Tag } from 'antd';
+import { Avatar, Dropdown, Icon, Menu, Tag } from 'antd';
 import R from '../../res/R';
 import { authActions } from '../../actions/auth.actions';
 import { connect } from 'react-redux';
@@ -116,14 +116,29 @@ class Header extends Component {
 	getUserBlockTemplate = () => {
 		const { currentUser, logout } = this.props;
 
+		const menu = currentUser ? (
+			<Menu>
+				<Menu.Item style={{ cursor: 'auto', pointerEvents: 'none' }}>
+					Signed in as <strong>{currentUser.email}</strong>
+				</Menu.Item>
+				<Menu.Divider/>
+				<Menu.Item key="logout" onClick={logout} className="userBlockMenuItem">Logout</Menu.Item>
+			</Menu>
+		) : null;
+
 		return (
 			<div className="userBlock">
 				{
 					currentUser ? (
-						<div className="userProfile">
-							<span className="userName">{`${currentUser.firstName} ${currentUser.lastName}`}</span>
-							<Button className="logoutBtn" onClick={() => logout()}>Logout</Button>
-						</div>
+						<Dropdown overlay={menu}>
+								<span
+									style={{ height: '100%', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+									className="userName">
+									{`${currentUser.firstName} ${currentUser.lastName}`}
+									<Avatar icon="user" style={{ marginLeft: '0.5em' }}/>
+								</span>
+						</Dropdown>
+
 					) : (
 						<div className="authenticationActions">
 							<div className="signInAction">

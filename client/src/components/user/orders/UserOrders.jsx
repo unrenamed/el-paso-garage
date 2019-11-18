@@ -14,12 +14,14 @@ class UserOrders extends Component {
 
 	loadMore = (page, type) => this.props.loadMore(page, type);
 
+	deleteOrder = (order, callback) => this.props.deleteOrder(order._id, callback);
+
 	render() {
 		const {
 			inProgressOrdersList, plannedOrdersList, archivedOrdersList,
 			inProgressOrdersListPage, plannedOrdersListPage, archivedOrdersListPage,
 			inProgressOrdersListPageCount, plannedOrdersListPageCount, archiveOrdersListPageCount,
-			loading
+			loading, deleteLoading
 		} = this.props;
 
 		return (
@@ -46,6 +48,8 @@ class UserOrders extends Component {
 									list={plannedOrdersList}
 									currentPage={plannedOrdersListPage}
 									pageCount={plannedOrdersListPageCount}
+									onDeleteOrder={this.deleteOrder}
+									deleteLoading={deleteLoading}
 									onLoadInit={this.loadInit}
 									onLoadMore={this.loadMore}/>
 					</TabPane>
@@ -72,19 +76,20 @@ const mapStateToProps = state => {
 		inProgressOrdersList, plannedOrdersList, archivedOrdersList,
 		inProgressOrdersListPage, plannedOrdersListPage, archivedOrdersListPage,
 		inProgressOrdersListPageCount, plannedOrdersListPageCount, archiveOrdersListPageCount,
-		loading
+		loading, deleteLoading
 	} = state.orderReducer;
 	return {
 		inProgressOrdersList, plannedOrdersList, archivedOrdersList,
 		inProgressOrdersListPage, plannedOrdersListPage, archivedOrdersListPage,
 		inProgressOrdersListPageCount, plannedOrdersListPageCount, archiveOrdersListPageCount,
-		loading
+		loading, deleteLoading
 	};
 };
 
 const mapDispatchToProps = {
 	loadMore: (page, type) => orderActions.getOrders(page, type, false),
 	loadInit: (type) => orderActions.getOrders(0, type, true),
+	deleteOrder: (orderId, callback) => orderActions.deleteUserOrder(orderId, callback)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserOrders);

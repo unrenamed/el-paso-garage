@@ -16,7 +16,8 @@ const initialState = {
 	archivedOrdersListPage: 0,
 	archivedOrdersListPageCount: 1,
 
-	loading: true
+	loading: true,
+	deleteLoading: false
 };
 
 export const orderReducer = (state = initialState, action) => {
@@ -94,6 +95,18 @@ export const orderReducer = (state = initialState, action) => {
 				archivedOrdersList: removeSkeletonItemsFromList(state.archivedOrdersList)
 			};
 
+
+		case orderConstants.DELETE_ORDER_REQUEST:
+			return { ...state, deleteLoading: true };
+		case orderConstants.DELETE_ORDER_SUCCESS:
+			return {
+				...state,
+				deleteLoading: false,
+				plannedOrdersList: removeOrderAndReturnList(action.payload.orderId, state.plannedOrdersList)
+			};
+		case orderConstants.DELETE_ORDER_FAILURE:
+			return { ...state, deleteLoading: false };
+
 		default:
 			return state;
 	}
@@ -112,4 +125,8 @@ const addMoreOrdersToList = (list, payload) => {
 	const { orders, isInitLoading } = payload;
 	list = isInitLoading ? [] : removeSkeletonItemsFromList(list);
 	return list.concat(orders);
+};
+
+const removeOrderAndReturnList = (orderId, list) => {
+	return list.filter(i => i._id !== orderId);
 };

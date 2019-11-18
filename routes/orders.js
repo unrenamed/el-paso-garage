@@ -60,6 +60,16 @@ router.get('/', withAuth, (req, res) => {
 	}
 });
 
+router.delete('/:id', withAuth, (req, res, next) => {
+	const { id } = req.params;
+	Order.findByIdAndDelete(id, err => {
+		if (err)
+			sendInternalServerError(res);
+		else
+			res.status(200).json({ message: 'Order was successfully deleted' });
+	});
+});
+
 const returnOrders = (page, filter, userEmail, res) => {
 	getCountOfOrders(filter, userEmail, res)
 		.exec((err, count) => {

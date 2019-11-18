@@ -106,7 +106,25 @@ const getArchivedOrders = (page, isInitLoading) => dispatch => {
 	);
 };
 
+const deleteUserOrder = (orderId, callback) => dispatch => {
+	dispatch({ type: orderConstants.DELETE_ORDER_REQUEST });
+
+	orderService.deleteUserOrders(orderId).then(
+		res => {
+			dispatch({ type: orderConstants.DELETE_ORDER_SUCCESS, payload: { orderId } });
+			message.success(res.message);
+			callback();
+		},
+		error => {
+			dispatch({ type: orderConstants.DELETE_ORDER_FAILURE });
+			message.error(error);
+			callback();
+		}
+	);
+};
+
 export const orderActions = {
 	saveOrder,
-	getOrders
+	getOrders,
+	deleteUserOrder
 };
