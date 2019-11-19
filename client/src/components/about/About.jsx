@@ -1,6 +1,7 @@
-import './About.css';
 import React, { Component } from 'react';
 import { Card, Icon, Timeline } from 'antd';
+import './About.css';
+import R from '../../res/R';
 
 class About extends Component {
 	render() {
@@ -8,38 +9,38 @@ class About extends Component {
 			<div className="aboutComponent">
 				<div className="contentWrapper">
 					<div className="epgPhoto"/>
-					<p><strong>Lorem ipsum dolor</strong> sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-						incididunt ut
-						labore
-						et dolore magna aliqua. Vel pretium lectus quam id. Nibh ipsum consequat nisl vel pretium lectus
-						quam id leo. Augue eget arcu dictum varius. Ipsum faucibus vitae aliquet nec ullamcorper. Et
-						pharetra pharetra massa massa ultricies mi quis hendrerit. Congue mauris rhoncus aenean vel elit
-						scelerisque mauris pellentesque. Morbi tristique senectus et netus et malesuada fames ac turpis.
-						Neque laoreet suspendisse interdum consectetur. Orci porta non pulvinar neque laoreet
-						suspendisse
-						interdum consectetur libero. Eget aliquet nibh praesent tristique magna sit amet purus gravida.
-						Nisi
-						scelerisque eu ultrices vitae auctor eu. Vitae congue eu consequat ac felis donec et odio
-						pellentesque. Vulputate eu scelerisque felis imperdiet proin fermentum leo vel. Tellus rutrum
-						tellus
-						pellentesque eu. Dui sapien eget mi proin sed libero enim sed faucibus. Vel eros donec ac odio
-						tempor orci dapibus ultrices in. Diam maecenas sed enim ut sem viverra aliquet.</p>
-					<p>Dis parturient montes nascetur ridiculus. <strong>Viverra</strong> justo nec ultrices dui sapien
-						eget mi proin.
-						Eget
-						nulla facilisi etiam dignissim diam quis enim. Dui sapien eget mi proin sed. Molestie nunc non
-						blandit massa enim nec dui nunc mattis. Et ultrices neque ornare aenean. Velit dignissim sodales
-						ut
-						eu sem integer. Diam donec adipiscing tristique risus. Tincidunt id aliquet risus feugiat in
-						ante
-						metus. Malesuada fames ac turpis egestas integer eget. Interdum consectetur libero id faucibus
-						nisl
-						tincidunt eget nullam non.</p>
-					<p><strong>Volutpat sed cras</strong> ornare arcu dui vivamus arcu felis. Auctor urna nunc id
-						cursus metus aliquam eleifend. Lacinia quis vel eros donec ac odio. At in tellus integer feugiat
-						scelerisque varius morbi. Cursus risus at ultrices mi tempus imperdiet. Posuere urna nec
-						tincidunt
-						praesent semper feugiat nibh.</p>
+					<p>
+						If you’re looking for auto repair in El Paso, Mexico you’ve found us. Here
+						at <strong>{R.strings.projectName}</strong> we work hard to earn your trust and loyalty. We know
+						how important it
+						is to find a
+						El Paso car service you can rely on, so your satisfaction is our top priority each and
+						every day.
+					</p>
+					<p><strong>{R.strings.projectName}</strong> has been providing quality foreign and domestic car
+						care, and
+						full
+						service gasoline in El Paso, Mexico since 1950.
+						We are a family owned business delivering honest and professional automotive repair and
+						auto
+						maintenance services to the people of El Paso, and surrounding areas.
+						Winner of 2016 "Best of El Paso" El Paso Illustrated Magazine. The quality ASE
+						(automotive
+						service excellence) certified technicians at <strong>{R.strings.projectName}</strong>
+						Inc employ today’s latest automotive technology and are equipped to handle all major and
+						minor
+						repairs on foreign and domestic vehicles.
+					</p>
+					<p>
+						Here at <strong>{R.strings.projectName}</strong> we understand what makes customer service truly
+						outstanding. You
+						will feel the difference exceptional customer care makes when you work with us. We know auto
+						repair in El Paso offers you lots of choices, and we aim to provide the kind of caring
+						customer service that will bring you back.
+					</p>
+					<p>
+						Come by and visit our clean and professional shop in El Paso, Mexico.
+					</p>
 				</div>
 				<div className="infoWrapper">
 					<Card title="Contact us" style={{ width: 350 }}>

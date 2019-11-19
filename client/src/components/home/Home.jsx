@@ -14,29 +14,32 @@ class Home extends Component {
 					<div className="contentBody">
 						<Divider>Welcome to our website</Divider>
 						<div>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-								incididunt ut labore et dolore magna aliqua. Nibh nisl condimentum id venenatis a
-								condimentum vitae. Tortor condimentum lacinia quis vel eros donec. Vitae congue eu
-								consequat ac felis donec et odio pellentesque. Sollicitudin ac orci phasellus egestas
-								tellus rutrum tellus pellentesque. Amet est placerat in egestas. Sapien faucibus et
-								molestie ac feugiat sed lectus. Vel fringilla est ullamcorper eget nulla. Leo in vitae
-								turpis massa sed elementum tempus. Euismod nisi porta lorem mollis aliquam ut porttitor
-								leo a. Praesent semper feugiat nibh sed. Eu turpis egestas pretium aenean. Tellus
-								integer feugiat scelerisque varius. Nisl condimentum id venenatis a condimentum vitae
-								sapien pellentesque. Pharetra convallis posuere morbi leo urna molestie at. Duis ut diam
-								quam nulla porttitor massa. Diam vel quam elementum pulvinar etiam non quam lacus
-								suspendisse.
+							<p>{R.strings.projectName} has been providing quality foreign and domestic car care, and
+								full
+								service gasoline in El Paso, Mexico since 1950.
+								We are a family owned business delivering honest and professional automotive repair and
+								auto
+								maintenance services to the people of El Paso, and surrounding areas.
+								Winner of 2016 "Best of El Paso" El Paso Illustrated Magazine. The quality ASE
+								(automotive
+								service excellence) certified technicians at {R.strings.projectName}
+								Inc employ today’s latest automotive technology and are equipped to handle all major and
+								minor
+								repairs on foreign and domestic vehicles.
 							</p>
 							<p>
-								Fermentum posuere urna nec tincidunt praesent semper feugiat. Urna molestie at elementum
-								eu facilisis sed odio morbi quis. Mauris vitae ultricies leo integer. Diam quis enim
-								lobortis scelerisque fermentum dui. Sed felis eget velit aliquet sagittis id consectetur
-								purus. Rhoncus est pellentesque elit ullamcorper. Ac turpis egestas sed tempus urna.
-								Tristique nulla aliquet enim tortor at. At imperdiet dui accumsan sit amet. Sit amet
-								volutpat consequat mauris nunc congue nisi vitae. Magna ac placerat vestibulum lectus
-								mauris ultrices eros. Ultrices mi tempus imperdiet nulla malesuada. Auctor eu augue ut
-								lectus arcu bibendum at varius vel.
+								Our El Paso car service offers you years of combined expertise from our
+								well-trained technicians. We treat our auto repair professionals well, because we value
+								their skill and can-do attitude. We know our team sets us apart, saving you time and
+								money, not to mention worry. When it comes to auto repair in El Paso, we are
+								totally confident that {R.strings.projectName} is the best option in town!
+							</p>
+							<p>
+								Welcome! It's our goal at {R.strings.projectName} to always provide great service and
+								high-quality workmanship at a fair price.
+								Please browse around our website to learn more about us and our commitment to provide
+								you with
+								the best service possible.
 							</p>
 						</div>
 					</div>

@@ -50,7 +50,7 @@ router.post('/authenticate', (req, res) => {
 
 /* GET logged user */
 router.get('/loggedUser', withAuth, (req, res) => {
-	User.findOne({ email: req.email }, { password: 0 }, (err, user) => {
+	User.findOne({ email: req.user.email }, { password: 0 }, (err, user) => {
 		res.json(user);
 	});
 });

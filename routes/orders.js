@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 router.get('/', withAuth, (req, res) => {
 	const type = req.query.type;
 	const page = req.query.page ? req.query.page : 0;
-	const userEmail = req.email;
+	const userEmail = req.user.email;
 
 	let filter = {};
 	const now = moment().toDate();
@@ -62,11 +62,20 @@ router.get('/', withAuth, (req, res) => {
 
 router.delete('/:id', withAuth, (req, res, next) => {
 	const { id } = req.params;
-	Order.findByIdAndDelete(id, err => {
+	Order.findOne({ _id: id, userId: req.user._id }, (err, order) => {
 		if (err)
 			sendInternalServerError(res);
-		else
-			res.status(200).json({ message: 'Order was successfully deleted' });
+		else {
+			if (!order)
+				res.status(400).json({ error: `Order with ID: ${order._id} doesn\'t exist or you don\'t have permissions to delete it.` });
+			else
+				Order.deleteOne({ _id: order._id }, err => {
+					if (err)
+						sendInternalServerError(res);
+					else
+						res.status(200).json({ message: 'Order was successfully deleted' });
+				});
+		}
 	});
 });
 
