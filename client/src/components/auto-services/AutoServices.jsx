@@ -105,6 +105,8 @@ class AutoServices extends Component {
 	};
 
 	renderServiceInfoDrawer = () => {
+		const { savingOrder } = this.props;
+
 		return (
 			<Drawer
 				width={640}
@@ -129,7 +131,10 @@ class AutoServices extends Component {
 						textAlign: 'right',
 					}}
 				>
-					<Button style={{ width: '100%' }} onClick={this.submitUserForm} type="primary">
+					<Button style={{ width: '100%' }}
+							loading={savingOrder}
+							onClick={this.submitUserForm}
+							type="primary">
 						Order
 					</Button>
 				</div>
@@ -329,9 +334,10 @@ class AutoServices extends Component {
 
 const mapStateToProps = state => {
 	const { services, loadingServices } = state.serviceReducer;
+	const { savingOrder } = state.orderReducer;
 	const { currentUser } = state.authentication;
 
-	return { services, loadingServices, currentUser };
+	return { services, loadingServices, currentUser, savingOrder };
 };
 
 const mapDispatchToProps = {

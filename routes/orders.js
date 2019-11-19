@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
 			else {
 				const order = prepareOrderObject(service, orderRequest);
 				if (isUserExternal)
-					saveExternalUserAndOrder(user, order, res);
+					saveExternalUserAndOrder(orderRequest.user, order, res);
 				else
 					saveOrder(order, res);
 			}
@@ -140,12 +140,12 @@ const prepareOrderObject = (service, order) => {
 };
 
 const saveExternalUserAndOrder = (user, order, res) => {
-	const { email, firstName, lastName, phoneNumber } = user;
-	const externalUser = new ExternalUser({ email, firstName, lastName, phoneNumber });
+	const { email, name, surname, phone } = user;
+	const externalUser = new ExternalUser({ email, firstName: name, lastName: surname, phoneNumber: phone });
 
 	externalUser.save((err, user) => {
 		if (err)
-			res.status(500).json({ error: `Error saving external user with e-mail ${user.email}. Please, try again!` });
+			res.status(500).json({ error: `Error saving external user with e-mail ${email}. Please, try again!` });
 		else
 			saveOrder({ ...order, userId: user.id }, res);
 	});
