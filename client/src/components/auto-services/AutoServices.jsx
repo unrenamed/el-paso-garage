@@ -96,7 +96,7 @@ class AutoServices extends Component {
 				  hoverable={true}
 				  loading={this.props.loadingServices}
 			>
-				< Card.Meta
+				<Card.Meta
 					title={service.title}
 					description={service.description}
 				/>

@@ -71,3 +71,7 @@
     object-fit: cover;
     object-position: center;
 }
+
+.autoServicesWrapper .ant-card-meta-description {
+    height: 125px;
+}
