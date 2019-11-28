@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 router.get('/', withAuth, (req, res) => {
 	const type = req.query.type;
 	const page = req.query.page ? req.query.page : 0;
-	const userEmail = req.user.email;
+	const userId = req.user._id;
 
 	let filter = {};
 	const now = moment().toDate();
@@ -44,15 +44,15 @@ router.get('/', withAuth, (req, res) => {
 	switch (type) {
 		case OrderTypes.IN_PROGRESS:
 			filter = { ...filter, startDate: { $lte: now }, endDate: { $gte: now } };
-			returnOrders(page, filter, userEmail, res);
+			returnOrders(page, filter, userId, res);
 			break;
 		case OrderTypes.PLANNED:
 			filter = { ...filter, startDate: { $gte: now } };
-			returnOrders(page, filter, userEmail, res);
+			returnOrders(page, filter, userId, res);
 			break;
 		case OrderTypes.ARCHIVED:
 			filter = { ...filter, endDate: { $lte: now } };
-			returnOrders(page, filter, userEmail, res);
+			returnOrders(page, filter, userId, res);
 			break;
 		default:
 			res.status(200).json({ orders: [] });
@@ -67,7 +67,7 @@ router.delete('/:id', withAuth, (req, res, next) => {
 			sendInternalServerError(res);
 		else {
 			if (!order)
-				res.status(400).json({ error: `Order with ID: ${order._id} doesn\'t exist or you don\'t have permissions to delete it.` });
+				res.status(400).json({ error: `Order doesn\'t exist or you don\'t have permissions to delete it.` });
 			else
 				Order.deleteOne({ _id: order._id }, err => {
 					if (err)
@@ -79,19 +79,15 @@ router.delete('/:id', withAuth, (req, res, next) => {
 	});
 });
 
-const returnOrders = (page, filter, userEmail, res) => {
-	getCountOfOrders(filter, userEmail, res)
+const returnOrders = (page, filter, userId, res) => {
+	getCountOfOrders(filter, userId, res)
 		.exec((err, count) => {
 			if (err)
 				sendInternalServerError(res);
 			else {
 				Order.find(filter)
 					.populate('serviceId', 'title price')
-					.populate({
-						path: 'userId',
-						select: 'email',
-						match: { email: userEmail }
-					})
+					.where('userId').equals(userId)
 					.limit(ITEMS_PER_PAGE)
 					.skip(ITEMS_PER_PAGE * page)
 					.sort({ startDate: 'desc' })
@@ -107,13 +103,10 @@ const returnOrders = (page, filter, userEmail, res) => {
 		});
 };
 
-const getCountOfOrders = (filter, userEmail) => {
+const getCountOfOrders = (filter, userId) => {
 	return Order.countDocuments(filter)
 		.populate('serviceId', 'title price')
-		.populate({
-			path: 'userId',
-			match: { email: userEmail }
-		});
+		.where('userId').equals(userId);
 };
 
 const validateOrder = order => {

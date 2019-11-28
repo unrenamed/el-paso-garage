@@ -68,7 +68,7 @@ class OrdersList extends Component {
 					dataSource={list}
 					renderItem={item => (
 						<List.Item
-							actions={[this.props.orderType === OrderTypes.PLANNED ?
+							actions={[this.props.orderType === OrderTypes.PLANNED && !this.props.loading ?
 								<Button onClick={() => this.showDeleteModal(item)} type="danger">Delete</Button>
 								: null
 							]}
