@@ -113,8 +113,8 @@ const validateOrder = order => {
 	const { startDate } = order;
 	const startOfOrderProcessing = moment(startDate);
 	const isStartOfOrderProcessingBeforeTomorrow = startOfOrderProcessing.isSameOrBefore(moment().set('h', 23).set('m', 59).set('s', 59));
-	const startOfWorkingDay = moment(startDate).set('h', 7).set('m', 30);
-	const endOfWorkingDay = moment(startDate).set('h', 17).set('m', 0);
+	const startOfWorkingDay = startOfOrderProcessing.set('h', 5).set('m', 30);
+	const endOfWorkingDay = startOfOrderProcessing.set('h', 15).set('m', 0);
 
 	return !(isStartOfOrderProcessingBeforeTomorrow ||
 		startOfOrderProcessing.isBefore(startOfWorkingDay) ||
